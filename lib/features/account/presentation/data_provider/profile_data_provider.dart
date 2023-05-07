@@ -27,19 +27,27 @@ class ProfileDataProvider extends ChangeNotifier {
   }
 
   void updateFirstName(firstName) {
-    state = state.copyWith(user: state.user.copyWith(firstName: firstName));
+    state = state.copyWith(
+        user: state.user.copyWith(
+            profile: state.user.profile.copyWith(first_name: firstName)));
   }
 
   void updateLastName(lastName) {
-    state = state.copyWith(user: state.user.copyWith(lastName: lastName));
+    state = state.copyWith(
+        user: state.user.copyWith(
+            profile: state.user.profile.copyWith(last_name: lastName)));
   }
 
-  void updatePhone(phone) {
-    state = state.copyWith(user: state.user.copyWith(phone: phone));
+  void updateVille(ville) {
+    state = state.copyWith(
+        user: state.user
+            .copyWith(profile: state.user.profile.copyWith(ville: ville)));
   }
 
-  void updateAdress(adress) {
-    state = state.copyWith(user: state.user.copyWith(address: adress));
+  void updateJob(job) {
+    state = state.copyWith(
+        user: state.user
+            .copyWith(profile: state.user.profile.copyWith(job: job)));
   }
 
   void updateEmail(email) {

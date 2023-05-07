@@ -66,7 +66,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   Align(
                     alignment: Alignment.center,
                     child: CustomTextField(
-                      value: profileDataProvider.state.user.firstName,
+                      value: profileDataProvider.state.user.profile.first_name,
                       hint: 'First Name',
                       onEdit: profileDataProvider.updateFirstName,
                     ),
@@ -77,7 +77,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   Align(
                     alignment: Alignment.center,
                     child: CustomTextField(
-                        value: profileDataProvider.state.user.lastName,
+                        value: profileDataProvider.state.user.profile.last_name,
                         hint: 'Last Name',
                         onEdit: profileDataProvider.updateLastName),
                   ),
@@ -87,9 +87,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   Align(
                     alignment: Alignment.center,
                     child: CustomTextField(
-                        value: profileDataProvider.state.user.phone,
-                        hint: 'Phone Number',
-                        onEdit: profileDataProvider.updatePhone),
+                        value: profileDataProvider.state.user.profile.ville,
+                        hint: 'Ville',
+                        onEdit: profileDataProvider.updateVille),
                   ),
                   const SizedBox(
                     height: 16,
@@ -97,9 +97,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   Align(
                     alignment: Alignment.center,
                     child: CustomTextField(
-                        value: profileDataProvider.state.user.address,
-                        hint: 'Adress',
-                        onEdit: profileDataProvider.updateAdress),
+                        value: profileDataProvider.state.user.profile.job,
+                        hint: 'Job',
+                        onEdit: profileDataProvider.updateJob),
                   ),
                   const SizedBox(
                     height: 16,

@@ -7,7 +7,7 @@ part 'auth_response.g.dart';
 @freezed
 class AuthResponse with _$AuthResponse {
   factory AuthResponse({
-    @JsonKey(name: 'access_token') required String accessToken,
+    @JsonKey(name: 'accessToken') required String accessToken,
     required UserModel user,
   }) = _AuthReponse;
 

@@ -51,8 +51,15 @@ dependencies:
   get_it: ^7.2.0
   url_launcher: ^6.0.20
   material_design_icons_flutter: ^6.0.7096
-  intl: ^0.18.0
+  intl: ^0.17.0
   image_picker: ^0.8.3
+  form_builder_validators: ^8.3.0
+  shimmer: ^2.0.0
+  searchable_listview: ^2.4.0
+  sprintf: ^7.0.0
+  collection: ^1.16.0
+  flutter_form_builder: ^7.7.0
+  form_builder_extra_fields: ^8.3.0
 
 
 

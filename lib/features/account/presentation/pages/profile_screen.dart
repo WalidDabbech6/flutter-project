@@ -5,6 +5,15 @@ import 'package:marketplace_client_app/features/authentification/presentation/pa
 import 'package:marketplace_client_app/features/container/presentation/data_provider/container_screen_provider.dart';
 import 'package:provider/provider.dart';
 
+extension StringCasingExtension on String {
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
+}
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -45,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 125,
             child: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'https://scontent.ftun19-1.fna.fbcdn.net/v/t1.6435-9/43722103_906829279520108_4391705438568054784_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=tLRhDqjy-XcAX9QLK1-&_nc_ht=scontent.ftun19-1.fna&oh=00_AT-F8ZO2c13O7WN2-rFB7aWR3h1o6lmv_J_h4IaANooSPA&oe=62649338'),
+                  'http://192.168.1.14:8000/users/2/profile_photo.ico'),
               backgroundColor: Theme.of(context).primaryColor,
             ),
           ),
@@ -53,10 +62,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 5,
           ),
           Container(
-              child: Text(
-            provider.state.connectedUser?.fullName ?? '',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          )),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                provider.state.connectedUser?.profile.first_name
+                        .toCapitalized() ??
+                    "",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                provider.state.connectedUser?.profile.last_name
+                        .toCapitalized() ??
+                    "",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+              ),
+            ]),
+          ),
           SizedBox(
             height: 5,
           ),
@@ -114,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: SizedBox(
-                        height: 320,
+                        height: 280,
                         child: ListView(
                           shrinkWrap: true,
                           children: <Widget>[
@@ -131,14 +154,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     "First Name",
                                     style: TextStyle(
                                         fontSize: 14,
-                                        fontWeight: FontWeight.w200),
+                                        fontWeight: FontWeight.w400),
                                   ),
                                   subtitle: Text(
-                                      provider.state.connectedUser?.firstName ??
+                                      provider.state.connectedUser?.profile
+                                              .first_name
+                                              .toCapitalized() ??
                                           '',
                                       style: TextStyle(
                                           fontSize: 18,
-                                          fontWeight: FontWeight.w500)),
+                                          fontWeight: FontWeight.w700)),
                                 ),
                               ),
                             ),
@@ -158,14 +183,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     "Last Name",
                                     style: TextStyle(
                                         fontSize: 14,
-                                        fontWeight: FontWeight.w200),
+                                        fontWeight: FontWeight.w400),
                                   ),
                                   subtitle: Text(
-                                      provider.state.connectedUser?.lastName ??
+                                      provider.state.connectedUser?.profile
+                                              .last_name
+                                              .toCapitalized() ??
                                           '',
                                       style: TextStyle(
                                           fontSize: 18,
-                                          fontWeight: FontWeight.w500)),
+                                          fontWeight: FontWeight.w700)),
                                 ),
                               ),
                             ),
@@ -185,13 +212,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     "Email",
                                     style: TextStyle(
                                         fontSize: 14,
-                                        fontWeight: FontWeight.w200),
+                                        fontWeight: FontWeight.w400),
                                   ),
                                   subtitle: Text(
                                       provider.state.connectedUser?.email ?? '',
                                       style: TextStyle(
                                           fontSize: 18,
-                                          fontWeight: FontWeight.w500)),
+                                          fontWeight: FontWeight.w700)),
                                 ),
                               ),
                             ),
@@ -208,43 +235,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     Theme.of(context).scaffoldBackgroundColor,
                                 child: ListTile(
                                   title: Text(
-                                    "Phone Number",
+                                    "Job",
                                     style: TextStyle(
                                         fontSize: 14,
-                                        fontWeight: FontWeight.w200),
+                                        fontWeight: FontWeight.w400),
                                   ),
                                   subtitle: Text(
-                                      provider.state.connectedUser?.phone ?? '',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500)),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              child: Container(
-                                width: 275,
-                                height: 65,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                child: ListTile(
-                                  title: Text(
-                                    "Address",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w200),
-                                  ),
-                                  subtitle: Text(
-                                      provider.state.connectedUser?.address ??
+                                      provider.state.connectedUser?.profile
+                                              .job ??
                                           '',
                                       style: TextStyle(
                                           fontSize: 18,
-                                          fontWeight: FontWeight.w500)),
+                                          fontWeight: FontWeight.w700)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                              child: Container(
+                                width: 275,
+                                height: 65,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                child: ListTile(
+                                  title: Text(
+                                    "Ville",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  subtitle: Text(
+                                      provider.state.connectedUser?.profile
+                                              .ville ??
+                                          '',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700)),
                                 ),
                               ),
                             ),

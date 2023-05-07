@@ -20,7 +20,7 @@ AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AuthResponse {
-  @JsonKey(name: 'access_token')
+  @JsonKey(name: 'accessToken')
   String get accessToken => throw _privateConstructorUsedError;
   UserModel get user => throw _privateConstructorUsedError;
 
@@ -36,8 +36,7 @@ abstract class $AuthResponseCopyWith<$Res> {
           AuthResponse value, $Res Function(AuthResponse) then) =
       _$AuthResponseCopyWithImpl<$Res, AuthResponse>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'access_token') String accessToken, UserModel user});
+  $Res call({@JsonKey(name: 'accessToken') String accessToken, UserModel user});
 
   $UserModelCopyWith<$Res> get user;
 }
@@ -87,8 +86,7 @@ abstract class _$$_AuthReponseCopyWith<$Res>
       __$$_AuthReponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'access_token') String accessToken, UserModel user});
+  $Res call({@JsonKey(name: 'accessToken') String accessToken, UserModel user});
 
   @override
   $UserModelCopyWith<$Res> get user;
@@ -125,14 +123,14 @@ class __$$_AuthReponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AuthReponse implements _AuthReponse {
   _$_AuthReponse(
-      {@JsonKey(name: 'access_token') required this.accessToken,
+      {@JsonKey(name: 'accessToken') required this.accessToken,
       required this.user});
 
   factory _$_AuthReponse.fromJson(Map<String, dynamic> json) =>
       _$$_AuthReponseFromJson(json);
 
   @override
-  @JsonKey(name: 'access_token')
+  @JsonKey(name: 'accessToken')
   final String accessToken;
   @override
   final UserModel user;
@@ -172,14 +170,14 @@ class _$_AuthReponse implements _AuthReponse {
 
 abstract class _AuthReponse implements AuthResponse {
   factory _AuthReponse(
-      {@JsonKey(name: 'access_token') required final String accessToken,
+      {@JsonKey(name: 'accessToken') required final String accessToken,
       required final UserModel user}) = _$_AuthReponse;
 
   factory _AuthReponse.fromJson(Map<String, dynamic> json) =
       _$_AuthReponse.fromJson;
 
   @override
-  @JsonKey(name: 'access_token')
+  @JsonKey(name: 'accessToken')
   String get accessToken;
   @override
   UserModel get user;

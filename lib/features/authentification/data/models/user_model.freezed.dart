@@ -20,17 +20,12 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  String get username => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get firstName => throw _privateConstructorUsedError;
-  String get lastName => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get updatedAt => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
-  String get fullName => throw _privateConstructorUsedError;
-  bool get isAvailable => throw _privateConstructorUsedError;
+  bool get isVerified => throw _privateConstructorUsedError;
+  String get otp => throw _privateConstructorUsedError;
+  UserProfileModel get profile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,17 +39,14 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String username,
+      {int id,
+      String password,
       String email,
-      String firstName,
-      String lastName,
-      String phone,
-      String address,
-      String createdAt,
-      String updatedAt,
-      String id,
-      String fullName,
-      bool isAvailable});
+      bool isVerified,
+      String otp,
+      UserProfileModel profile});
+
+  $UserProfileModelCopyWith<$Res> get profile;
 }
 
 /// @nodoc
@@ -70,64 +62,47 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
-    Object? email = null,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? phone = null,
-    Object? address = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
     Object? id = null,
-    Object? fullName = null,
-    Object? isAvailable = null,
+    Object? password = null,
+    Object? email = null,
+    Object? isVerified = null,
+    Object? otp = null,
+    Object? profile = null,
   }) {
     return _then(_value.copyWith(
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      fullName: null == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String,
-      isAvailable: null == isAvailable
-          ? _value.isAvailable
-          : isAvailable // ignore: cast_nullable_to_non_nullable
+      isVerified: null == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
               as bool,
+      otp: null == otp
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as String,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as UserProfileModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserProfileModelCopyWith<$Res> get profile {
+    return $UserProfileModelCopyWith<$Res>(_value.profile, (value) {
+      return _then(_value.copyWith(profile: value) as $Val);
+    });
   }
 }
 
@@ -139,17 +114,15 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String username,
+      {int id,
+      String password,
       String email,
-      String firstName,
-      String lastName,
-      String phone,
-      String address,
-      String createdAt,
-      String updatedAt,
-      String id,
-      String fullName,
-      bool isAvailable});
+      bool isVerified,
+      String otp,
+      UserProfileModel profile});
+
+  @override
+  $UserProfileModelCopyWith<$Res> get profile;
 }
 
 /// @nodoc
@@ -163,63 +136,38 @@ class __$$_UserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
-    Object? email = null,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? phone = null,
-    Object? address = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
     Object? id = null,
-    Object? fullName = null,
-    Object? isAvailable = null,
+    Object? password = null,
+    Object? email = null,
+    Object? isVerified = null,
+    Object? otp = null,
+    Object? profile = null,
   }) {
     return _then(_$_UserModel(
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      fullName: null == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String,
-      isAvailable: null == isAvailable
-          ? _value.isAvailable
-          : isAvailable // ignore: cast_nullable_to_non_nullable
+      isVerified: null == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
               as bool,
+      otp: null == otp
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as String,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as UserProfileModel,
     ));
   }
 }
@@ -228,47 +176,32 @@ class __$$_UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
   _$_UserModel(
-      {required this.username,
+      {required this.id,
+      required this.password,
       required this.email,
-      required this.firstName,
-      required this.lastName,
-      required this.phone,
-      required this.address,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.id,
-      required this.fullName,
-      required this.isAvailable});
+      required this.isVerified,
+      required this.otp,
+      required this.profile});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
 
   @override
-  final String username;
+  final int id;
+  @override
+  final String password;
   @override
   final String email;
   @override
-  final String firstName;
+  final bool isVerified;
   @override
-  final String lastName;
+  final String otp;
   @override
-  final String phone;
-  @override
-  final String address;
-  @override
-  final String createdAt;
-  @override
-  final String updatedAt;
-  @override
-  final String id;
-  @override
-  final String fullName;
-  @override
-  final bool isAvailable;
+  final UserProfileModel profile;
 
   @override
   String toString() {
-    return 'UserModel(username: $username, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, address: $address, createdAt: $createdAt, updatedAt: $updatedAt, id: $id, fullName: $fullName, isAvailable: $isAvailable)';
+    return 'UserModel(id: $id, password: $password, email: $email, isVerified: $isVerified, otp: $otp, profile: $profile)';
   }
 
   @override
@@ -276,41 +209,20 @@ class _$_UserModel implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
-            (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.fullName, fullName) ||
-                other.fullName == fullName) &&
-            (identical(other.isAvailable, isAvailable) ||
-                other.isAvailable == isAvailable));
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified) &&
+            (identical(other.otp, otp) || other.otp == otp) &&
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      username,
-      email,
-      firstName,
-      lastName,
-      phone,
-      address,
-      createdAt,
-      updatedAt,
-      id,
-      fullName,
-      isAvailable);
+  int get hashCode =>
+      Object.hash(runtimeType, id, password, email, isVerified, otp, profile);
 
   @JsonKey(ignore: true)
   @override
@@ -328,43 +240,28 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   factory _UserModel(
-      {required final String username,
+      {required final int id,
+      required final String password,
       required final String email,
-      required final String firstName,
-      required final String lastName,
-      required final String phone,
-      required final String address,
-      required final String createdAt,
-      required final String updatedAt,
-      required final String id,
-      required final String fullName,
-      required final bool isAvailable}) = _$_UserModel;
+      required final bool isVerified,
+      required final String otp,
+      required final UserProfileModel profile}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
 
   @override
-  String get username;
+  int get id;
+  @override
+  String get password;
   @override
   String get email;
   @override
-  String get firstName;
+  bool get isVerified;
   @override
-  String get lastName;
+  String get otp;
   @override
-  String get phone;
-  @override
-  String get address;
-  @override
-  String get createdAt;
-  @override
-  String get updatedAt;
-  @override
-  String get id;
-  @override
-  String get fullName;
-  @override
-  bool get isAvailable;
+  UserProfileModel get profile;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

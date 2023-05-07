@@ -29,10 +29,11 @@ class AuthenticateUserRepositoryImpl implements AuthenticateUserRepository {
         var response = await apiAdapter.dio.post(
           ApiEndpoints.loginApiEndpoint,
           data: {
-            'username': email,
+            'email': email,
             'password': password,
           },
         ).timeout(Duration(seconds: 3));
+        print(response.data);
         var authResponse = AuthResponse.fromJson(response.data);
         final prefs = await SharedPreferences.getInstance();
 
@@ -64,6 +65,7 @@ class AuthenticateUserRepositoryImpl implements AuthenticateUserRepository {
           ),
         );
       } catch (e) {
+        print(e);
         stream.add(
           DataResponse.error(),
         );

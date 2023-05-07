@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:marketplace_client_app/core/injector/api_adapter.dart';
 import 'package:marketplace_client_app/core/injector/shared_preference_keys.dart';
 import 'package:marketplace_client_app/core/usecases/data_response.dart';
 import 'package:marketplace_client_app/core/utils/utility_functions.dart';
 import 'package:marketplace_client_app/features/account/domain/repositories/update_account_repository.dart';
+import 'package:marketplace_client_app/features/authentification/data/models/userProfile_model.dart';
 import 'package:marketplace_client_app/features/authentification/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,18 +19,26 @@ class UpdateAccountRepositoryImpl implements UpdateAccountRepository {
   @override
   Future<void> updateAccount(
     UserModel user,
-    StreamController<DataResponse<UserModel>> stream,
+    StreamController<DataResponse<UserProfileModel>> stream,
   ) async {
     var hasNetwork = await verifyConnection();
     if (hasNetwork) {
       stream.add(DataResponse.loading());
       try {
-        var response = await apiAdapter.dio.post(
+        final formData = FormData.fromMap({
+          'first_name': user.profile.first_name,
+          'last_name': user.profile.last_name,
+          'job': user.profile.job,
+          'profile_photo': null,
+          'ville': user.profile.ville,
+          'gender': true
+        });
+        var response = await apiAdapter.dio.put(
           ApiEndpoints.updateAccountApiEndpoint,
-          data: user.toJson(),
+          data: formData,
         );
         final prefs = await SharedPreferences.getInstance();
-        var updateResponse = UserModel.fromJson(
+        var updateResponse = UserProfileModel.fromJson(
           response.data,
         );
 
@@ -42,6 +52,7 @@ class UpdateAccountRepositoryImpl implements UpdateAccountRepository {
           data: updateResponse,
         ));
       } catch (e) {
+        print(e);
         stream.add(DataResponse.error());
       }
     } else {
@@ -62,9 +73,9 @@ class UpdateAccountRepositoryImpl implements UpdateAccountRepository {
             sharedPrefs.getString(SharedPreferenceKeys.userKey) ?? '',
           ),
         );
-        var response = await apiAdapter.dio.post(
+        var response = await apiAdapter.dio.patch(
           ApiEndpoints.updateAccountApiEndpoint,
-          data: user.copyWith(isAvailable: status).toJson(),
+          data: user.copyWith(isVerified: status).toJson(),
         );
         final prefs = await SharedPreferences.getInstance();
         var updateResponse = UserModel.fromJson(

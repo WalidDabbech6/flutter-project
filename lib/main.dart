@@ -7,9 +7,20 @@ import 'package:marketplace_client_app/features/account/domain/usecases/update_a
 import 'package:marketplace_client_app/features/authentification/domain/usecases/authenticate_user.dart';
 import 'package:marketplace_client_app/features/authentification/presentation/data_provider/login_data_provider.dart';
 import 'package:marketplace_client_app/features/container/presentation/data_provider/container_screen_provider.dart';
-import 'package:marketplace_client_app/features/splash_screen/presentation/pages/splash_screen.dart';
+import 'package:marketplace_client_app/features/form/domain/usecases/create_form.dart';
+import 'package:marketplace_client_app/features/form/domain/usecases/create_question.dart';
+import 'package:marketplace_client_app/features/form/domain/usecases/delete_question.dart';
+import 'package:marketplace_client_app/features/form/domain/usecases/get_form_questions.dart';
+import 'package:marketplace_client_app/features/form/presentation/data_provider/detail_form_data_provider.dart';
+import 'package:marketplace_client_app/features/form/presentation/data_provider/detail_question_data_provider.dart';
+import 'package:marketplace_client_app/features/form/presentation/data_provider/list_forms_data_provider.dart';
 import 'package:marketplace_client_app/page/on_boarding_page.dart';
 import 'package:provider/provider.dart';
+
+import 'features/form/domain/usecases/create_choice.dart';
+import 'features/form/domain/usecases/delete_choice.dart';
+import 'features/form/domain/usecases/get_list_forms.dart';
+import 'features/form/domain/usecases/get_question_details.dart';
 
 Future main() async {
   initializeInjector();
@@ -27,7 +38,25 @@ Future main() async {
       ),
     ),
     ChangeNotifierProvider(
-      create: (context) => ContainerScreenProvider(),
+      create: (context) =>
+          ContainerScreenProvider(createFormUseCase: injector<CreateForm>()),
+    ),
+    ChangeNotifierProvider(
+      create: (context) =>
+          ListFormsDataProvider(getListFormsUseCase: injector<GetlistForms>()),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => DetailFormDataProvider(
+          getFormQuestions: injector<GetFormsQuestions>(),
+          deleteQuestion: injector<DeleteQuestion>(),
+          createQuestion: injector<CreateQuestion>()),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => DetailQuestionDataProvider(
+        getQuestionDetails: injector<GetQuestionDetails>(),
+        createChoice: injector<CreateChoice>(),
+        deleteChoice: injector<DeleteChoice>(),
+      ),
     ),
     ChangeNotifierProvider<ThemeProvider>(
         create: (context) => ThemeProvider()..initilize()),

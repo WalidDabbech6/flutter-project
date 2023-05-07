@@ -90,7 +90,10 @@ class _LoginOption1ScreenState extends State<LoginOption1Screen> {
                         width: 310,
                         height: 60,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const LoginScreen()));
+                          },
                           style: ElevatedButton.styleFrom(
                               primary: Theme.of(context).iconTheme.color,
                               shape: RoundedRectangleBorder(
@@ -101,10 +104,10 @@ class _LoginOption1ScreenState extends State<LoginOption1Screen> {
                               Text('connecter'),
                               IconButton(
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LoginScreen()));
+                                    // Navigator.of(context).push(
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             const LoginScreen()));
                                   },
                                   icon: Icon(Icons.arrow_circle_right))
                             ],

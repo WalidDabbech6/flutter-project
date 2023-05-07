@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sprintf/sprintf.dart';
 
 extension BuildContextExtensions on BuildContext {
   void displaySuccessSnackbar({required String message}) {
@@ -29,5 +30,11 @@ extension BuildContextExtensions on BuildContext {
     displayErrorSnackbar(
       message: 'Offline',
     );
+  }
+}
+
+extension StringExtensions on String {
+  String format([values]) {
+    return sprintf(this, values);
   }
 }

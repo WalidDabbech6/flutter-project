@@ -31,7 +31,7 @@ class AppInterceptors extends InterceptorsWrapper {
     if (err.response?.statusCode == 401 || err.response?.statusCode == 403) {
       //save user credentials into secure storage
       const secureStorage = FlutterSecureStorage();
-      var username = await secureStorage.read(
+      var email = await secureStorage.read(
         key: SharedPreferenceKeys.usernameKey,
       );
       var password = await secureStorage.read(
@@ -42,18 +42,17 @@ class AppInterceptors extends InterceptorsWrapper {
         var response = await Dio().post(
           ApiEndpoints.loginApiEndpoint,
           data: {
-            'username': username,
+            'email': email,
             'password': password,
           },
         );
-        var authResponse = AuthResponse.fromJson(response.data);
 
         await prefs.setString(
           SharedPreferenceKeys.tokenKey,
-          authResponse.accessToken,
+          response.data?.accessToken,
         );
         err.requestOptions.headers["Authorization"] =
-            "Bearer ${authResponse.accessToken}";
+            "Bearer ${response.data?.accessToken}";
         //create request with new access token
         final opts = Options(
           method: err.requestOptions.method,

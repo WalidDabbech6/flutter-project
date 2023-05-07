@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:marketplace_client_app/core/usecases/data_response.dart';
 import 'package:marketplace_client_app/features/account/domain/repositories/update_account_repository.dart';
+import 'package:marketplace_client_app/features/authentification/data/models/userProfile_model.dart';
 import 'package:marketplace_client_app/features/authentification/data/models/user_model.dart';
 import '../../../../core/usecases/usecase.dart';
 
@@ -19,7 +20,7 @@ class UpdateAccount implements UseCase<void, UpdateAccountParams> {
 
 class UpdateAccountParams extends Equatable {
   final UserModel user;
-  final StreamController<DataResponse<UserModel>> apiStream;
+  final StreamController<DataResponse<UserProfileModel>> apiStream;
 
   const UpdateAccountParams({required this.user, required this.apiStream});
 

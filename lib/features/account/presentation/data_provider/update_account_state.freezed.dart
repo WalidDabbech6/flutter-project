@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UpdateAccountState {
   UserModel get user => throw _privateConstructorUsedError;
-  StreamController<DataResponse<UserModel>> get apiStream =>
+  StreamController<DataResponse<UserProfileModel>> get apiStream =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +32,8 @@ abstract class $UpdateAccountStateCopyWith<$Res> {
       _$UpdateAccountStateCopyWithImpl<$Res, UpdateAccountState>;
   @useResult
   $Res call(
-      {UserModel user, StreamController<DataResponse<UserModel>> apiStream});
+      {UserModel user,
+      StreamController<DataResponse<UserProfileModel>> apiStream});
 
   $UserModelCopyWith<$Res> get user;
 }
@@ -61,7 +62,7 @@ class _$UpdateAccountStateCopyWithImpl<$Res, $Val extends UpdateAccountState>
       apiStream: null == apiStream
           ? _value.apiStream
           : apiStream // ignore: cast_nullable_to_non_nullable
-              as StreamController<DataResponse<UserModel>>,
+              as StreamController<DataResponse<UserProfileModel>>,
     ) as $Val);
   }
 
@@ -83,7 +84,8 @@ abstract class _$$_UpdateAccountStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {UserModel user, StreamController<DataResponse<UserModel>> apiStream});
+      {UserModel user,
+      StreamController<DataResponse<UserProfileModel>> apiStream});
 
   @override
   $UserModelCopyWith<$Res> get user;
@@ -111,7 +113,7 @@ class __$$_UpdateAccountStateCopyWithImpl<$Res>
       apiStream: null == apiStream
           ? _value.apiStream
           : apiStream // ignore: cast_nullable_to_non_nullable
-              as StreamController<DataResponse<UserModel>>,
+              as StreamController<DataResponse<UserProfileModel>>,
     ));
   }
 }
@@ -124,7 +126,7 @@ class _$_UpdateAccountState implements _UpdateAccountState {
   @override
   final UserModel user;
   @override
-  final StreamController<DataResponse<UserModel>> apiStream;
+  final StreamController<DataResponse<UserProfileModel>> apiStream;
 
   @override
   String toString() {
@@ -154,14 +156,14 @@ class _$_UpdateAccountState implements _UpdateAccountState {
 
 abstract class _UpdateAccountState implements UpdateAccountState {
   factory _UpdateAccountState(
-          {required final UserModel user,
-          required final StreamController<DataResponse<UserModel>> apiStream}) =
-      _$_UpdateAccountState;
+      {required final UserModel user,
+      required final StreamController<DataResponse<UserProfileModel>>
+          apiStream}) = _$_UpdateAccountState;
 
   @override
   UserModel get user;
   @override
-  StreamController<DataResponse<UserModel>> get apiStream;
+  StreamController<DataResponse<UserProfileModel>> get apiStream;
   @override
   @JsonKey(ignore: true)
   _$$_UpdateAccountStateCopyWith<_$_UpdateAccountState> get copyWith =>
