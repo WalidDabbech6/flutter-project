@@ -11,6 +11,7 @@ import 'package:marketplace_client_app/features/form/domain/usecases/create_form
 import 'package:marketplace_client_app/features/form/domain/usecases/create_question.dart';
 import 'package:marketplace_client_app/features/form/domain/usecases/delete_question.dart';
 import 'package:marketplace_client_app/features/form/domain/usecases/get_form_questions.dart';
+import 'package:marketplace_client_app/features/form/domain/usecases/submit_form.dart';
 import 'package:marketplace_client_app/features/form/presentation/data_provider/detail_form_data_provider.dart';
 import 'package:marketplace_client_app/features/form/presentation/data_provider/detail_question_data_provider.dart';
 import 'package:marketplace_client_app/features/form/presentation/data_provider/list_forms_data_provider.dart';
@@ -19,8 +20,10 @@ import 'package:provider/provider.dart';
 
 import 'features/form/domain/usecases/create_choice.dart';
 import 'features/form/domain/usecases/delete_choice.dart';
+import 'features/form/domain/usecases/get_form_responses.dart';
 import 'features/form/domain/usecases/get_list_forms.dart';
 import 'features/form/domain/usecases/get_question_details.dart';
+import 'features/form/presentation/data_provider/responses_form_data_provider.dart';
 
 Future main() async {
   initializeInjector();
@@ -47,6 +50,7 @@ Future main() async {
     ),
     ChangeNotifierProvider(
       create: (context) => DetailFormDataProvider(
+          submitForm: injector<SubmitForm>(),
           getFormQuestions: injector<GetFormsQuestions>(),
           deleteQuestion: injector<DeleteQuestion>(),
           createQuestion: injector<CreateQuestion>()),
@@ -56,6 +60,11 @@ Future main() async {
         getQuestionDetails: injector<GetQuestionDetails>(),
         createChoice: injector<CreateChoice>(),
         deleteChoice: injector<DeleteChoice>(),
+      ),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => ResponsesFormDataProvider(
+        getFormResponses: injector<GetFormResponses>(),
       ),
     ),
     ChangeNotifierProvider<ThemeProvider>(

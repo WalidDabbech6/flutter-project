@@ -28,6 +28,8 @@ class ApiEndpoints {
   static const resetPasswordApiEndpoint = '/auth/reset-password';
   static const updateAccountApiEndpoint = '/account/api/updateProfile';
   static const createNewFormApiEndpoint = '/forms/api/create';
+  static const submitFormApiEndpoint = '/forms/api/submit/%s';
+
   static const listFormsApiEndpoint = '/forms/api/create';
   static const listQuestionsFormApiEndpoint = '/forms/api/%s/questions';
   static const deleteQuestionApiEndpoint = '/forms/api/question/delete/%s';
@@ -36,4 +38,6 @@ class ApiEndpoints {
   static const createQuestion = '/forms/api/question/create/%s';
   static const createChoice = '/forms/api/choice/create/%s';
   static const deleteChoiceApiEndpoint = '/forms/api/choice/delte/%s';
+
+  static const responseFormApiEndpoint = '/forms/api/%s/responses/';
 }

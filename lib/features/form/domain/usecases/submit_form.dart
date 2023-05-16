@@ -6,28 +6,27 @@ import 'package:marketplace_client_app/features/form/domain/repositories/create_
 import '../../../../core/usecases/usecase.dart';
 import '../../data/models/form_model.dart';
 
-class CreateForm implements UseCase<void, CreateFormParams> {
+class SubmitForm implements UseCase<void, SubmitFormParams> {
   CreateFormRepository repository;
 
-  CreateForm({required this.repository});
+  SubmitForm({required this.repository});
 
   @override
-  Future<void> call(CreateFormParams params) {
-    return repository.CreateForm(
-        params.title, params.category, params.apiStream);
+  Future<DataResponse<FormModel>> call(SubmitFormParams params) {
+    return repository.SubmitForm(params.form, params.code, params.apiStream);
   }
 }
 
-class CreateFormParams extends Equatable {
-  final String title;
-  final int category;
+class SubmitFormParams extends Equatable {
+  final Map<String, dynamic> form;
+  final String code;
   final StreamController<DataResponse<FormModel>> apiStream;
 
-  const CreateFormParams(
-      {required this.title, required this.category, required this.apiStream});
+  const SubmitFormParams(
+      {required this.form, required this.code, required this.apiStream});
 
   @override
   List<Object> get props {
-    return [title];
+    return [];
   }
 }

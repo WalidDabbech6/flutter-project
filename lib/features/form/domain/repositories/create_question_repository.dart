@@ -6,7 +6,10 @@ import '../../data/models/form_model.dart';
 
 abstract class CreateQuestionRepository {
   Future<DataResponse<FormModel>> CreateQuestion(
-      StreamController<DataResponse<FormModel>> apiStream, String code);
+      StreamController<DataResponse<FormModel>> apiStream,
+      String code,
+      bool is_manadatory,
+      String title);
   Future<DataResponse<QuestionDetailsResponse>> getQuestionDetails(
       String question);
 }

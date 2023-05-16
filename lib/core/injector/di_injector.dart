@@ -17,10 +17,12 @@ import 'package:marketplace_client_app/features/form/domain/usecases/create_ques
 import 'package:marketplace_client_app/features/form/domain/usecases/delete_choice.dart';
 import 'package:marketplace_client_app/features/form/domain/usecases/delete_question.dart';
 import 'package:marketplace_client_app/features/form/domain/usecases/get_form_questions.dart';
+import 'package:marketplace_client_app/features/form/domain/usecases/get_form_responses.dart';
 import 'package:marketplace_client_app/features/form/domain/usecases/get_list_forms.dart';
 import 'package:marketplace_client_app/features/form/domain/usecases/get_question_details.dart';
 
 import '../../features/form/data/repositories/create_choice_repository_impl.dart';
+import '../../features/form/domain/usecases/submit_form.dart';
 
 GetIt injector = GetIt.instance;
 
@@ -107,6 +109,11 @@ initializeInjector() {
   injector.registerSingleton<GetQuestionDetails>(
       GetQuestionDetails(repository: injector()));
 
+  injector.registerSingleton<SubmitForm>(SubmitForm(repository: injector()));
+
   injector
       .registerSingleton<CreateChoice>(CreateChoice(repository: injector()));
+
+  injector.registerSingleton<GetFormResponses>(
+      GetFormResponses(repository: injector()));
 }

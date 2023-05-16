@@ -1,18 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marketplace_client_app/features/form/presentation/pages/form_results_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:marketplace_client_app/core/constant/colors.dart';
 
 import '../../features/form/data/models/form_model.dart';
+import '../../features/form/presentation/data_provider/responses_form_data_provider.dart';
 import 'circular_action.dart';
 
-class ListFormItem extends StatelessWidget {
+class ListFormItem extends StatefulWidget {
   final FormModel form;
 
   const ListFormItem({
     Key? key,
     required this.form,
   }) : super(key: key);
+
+  @override
+  State<ListFormItem> createState() => _ListFormItemState();
+}
+
+class _ListFormItemState extends State<ListFormItem> {
+  late ResponsesFormDataProvider dataProvider;
+  @override
+  void initState() {
+    super.initState();
+    dataProvider = Provider.of<ResponsesFormDataProvider>(
+      context,
+      listen: false,
+    );
+    // dataProvider.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +51,13 @@ class ListFormItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    form.title,
+                    widget.form.title,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    form.description,
+                    widget.form.description,
                   ),
                 ],
               ),
@@ -59,7 +77,14 @@ class ListFormItem extends StatelessWidget {
                         backgroundColor: blueColor.withOpacity(0.2),
                         icon: CupertinoIcons.eye,
                         iconColor: blueColor,
-                        onPress: () {},
+                        onPress: () {
+                          dataProvider.setFormCode(widget.form.code);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const FromResultsScreen(),
+                              ));
+                        },
                       ),
                       const SizedBox(
                         width: 5,

@@ -109,4 +109,59 @@ class CreateFormRepositoryImpl implements CreateFormRepository {
       return DataResponse.offline();
     }
   }
+
+  @override
+  Future<DataResponse<FormModel>> SubmitForm(Map<String, dynamic> form,
+      String code, StreamController<DataResponse<FormModel>> apiStream) async {
+    var hasNetwork = await verifyConnection();
+    if (hasNetwork) {
+      apiStream.add(DataResponse.loading());
+      try {
+        var response = await apiAdapter.dio.post(
+          ApiEndpoints.submitFormApiEndpoint.format([code]),
+          data: form,
+        );
+        var submitResponse = FormModel.fromJson(
+          response.data,
+        );
+
+        apiStream.add(DataResponse.completed(
+          data: submitResponse,
+        ));
+        return DataResponse.completed(
+          data: submitResponse,
+        );
+      } catch (e) {
+        print(e);
+        apiStream.add(DataResponse.error());
+        return DataResponse.error();
+      }
+    } else {
+      apiStream.add(
+        DataResponse.offline(),
+      );
+      return DataResponse.offline();
+    }
+  }
+
+  @override
+  Future<DataResponse<Map<String, dynamic>>> getFormResponses(
+      String form) async {
+    var hasNetwork = await verifyConnection();
+    if (hasNetwork) {
+      try {
+        var response = await apiAdapter.dio.get(
+          ApiEndpoints.responseFormApiEndpoint.format([form]),
+        );
+        return DataResponse.completed(
+          data: response.data,
+        );
+      } catch (e) {
+        print(e);
+        return DataResponse.error();
+      }
+    } else {
+      return DataResponse.offline();
+    }
+  }
 }

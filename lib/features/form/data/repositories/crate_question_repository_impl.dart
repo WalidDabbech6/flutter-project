@@ -15,14 +15,17 @@ class CreateQuestionRepositoryImpl implements CreateQuestionRepository {
 
   @override
   Future<DataResponse<FormModel>> CreateQuestion(
-      StreamController<DataResponse<FormModel>> apiStream, String code) async {
+      StreamController<DataResponse<FormModel>> apiStream,
+      String code,
+      bool is_manadatory,
+      String title) async {
     var hasNetwork = await verifyConnection();
     if (hasNetwork) {
       apiStream.add(DataResponse.loading());
       try {
         var response = await apiAdapter.dio.post(
           ApiEndpoints.createQuestion.format([code]),
-          data: {},
+          data: {"title": title, "is_manadatory": is_manadatory},
         );
         var createResponse = FormModel.fromJson(
           response.data,

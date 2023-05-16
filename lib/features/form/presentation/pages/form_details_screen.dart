@@ -4,7 +4,9 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:marketplace_client_app/core/usecases/data_response.dart';
 import 'package:marketplace_client_app/core/utils/extensions.dart';
 import 'package:marketplace_client_app/core/widgets/circular_action.dart';
+import 'package:marketplace_client_app/core/widgets/create_new_question.dart';
 import 'package:marketplace_client_app/features/form/data/models/question_model.dart';
+import 'package:marketplace_client_app/features/form/domain/usecases/create_question.dart';
 
 import 'package:marketplace_client_app/features/form/presentation/data_provider/detail_form_data_provider.dart';
 import 'package:marketplace_client_app/features/form/presentation/data_provider/detail_question_data_provider.dart';
@@ -40,7 +42,7 @@ class _FormDetailScreenState extends State<FormDetailScreen> {
       listen: false,
     );
     dataProvider.initState();
-    _observeApiResult();
+    _observeSubmitFormApiResult();
   }
 
   final _formKey = GlobalKey<FormBuilderState>();
@@ -49,11 +51,36 @@ class _FormDetailScreenState extends State<FormDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: Row(
+        children: [
+          Expanded(
+              child: ElevatedButton(
+                  onPressed: null,
+                  child: TextButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        dataProvider.setForm(_formKey.currentState!.value);
+                        await dataProvider.onSubmitForm();
+                        FocusScope.of(context).unfocus();
+                      }
+                    },
+                    child: Text("Submit"),
+                  )))
+        ],
+      ),
       floatingActionButton: ElevatedButton(
         child: IconButton(
             onPressed: () async {
               FocusScope.of(context).unfocus();
-              dataProvider.onSubmitPressed();
+              CreateNewQuestion(
+                title: 'Add New Choice',
+                message: 'Title',
+                onPressed: () async {
+                  dataProvider.onSubmitPressed();
+                },
+                onEdit: dataProvider.setQuestionTitle,
+              ).show(context);
             },
             icon: Icon(
               CupertinoIcons.plus,
@@ -147,7 +174,7 @@ class _FormDetailScreenState extends State<FormDetailScreen> {
                                                         FormBuilderFieldOption(
                                                             child:
                                                                 Text(e.choice),
-                                                            value: e.id
+                                                            value: e.choice
                                                                 .toString()),
                                                   )
                                                   .toList(),
@@ -159,13 +186,8 @@ class _FormDetailScreenState extends State<FormDetailScreen> {
                                               ),
                                               validator: FormBuilderValidators
                                                   .compose([
-                                                if (dataProvider
-                                                    .state
-                                                    .listQuestion
-                                                    .first
-                                                    .is_mandatory)
-                                                  FormBuilderValidators
-                                                      .minLength(1)
+                                                FormBuilderValidators.minLength(
+                                                    1)
                                               ]),
                                             ),
                                           ),
@@ -251,7 +273,7 @@ class _FormDetailScreenState extends State<FormDetailScreen> {
                                         )
                                       : Text("Hello"))
                               .toList(),
-                        )
+                        ),
                       ]))
                 ]));
               }
@@ -275,14 +297,13 @@ class _FormDetailScreenState extends State<FormDetailScreen> {
     );
   }
 
-  _observeApiResult() {
-    dataProvider.questionState.apiStream.stream.listen(
+  _observeSubmitFormApiResult() {
+    dataProvider.submitFormState.apiStream.stream.listen(
       (result) {
-        // FocusScope.of(context).unfocus();
         switch (result.status) {
           case Status.loading:
             LoadingPopup(
-              message: 'Updating Account...',
+              message: 'Submitting Form...',
               dismiss: false,
             ).show(context);
             break;
@@ -299,9 +320,11 @@ class _FormDetailScreenState extends State<FormDetailScreen> {
             dataProvider.getForm(result.data!);
             dataProvider.getListQuestionForm();
             Navigator.pop(context);
+            Navigator.pop(context);
             context.displaySuccessSnackbar(
-              message: 'updating account sucess',
+              message: dataProvider.state.form.confirmation_message,
             );
+
             break;
           default:
             break;
